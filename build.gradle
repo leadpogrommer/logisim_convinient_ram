@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
+    }
+}
+
+
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.30'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+group 'ru.leadpogommer.autoram'
+
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dir 'libs'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation name: 'logisim'
+}
+
+shadowJar {
+    dependencies {
+        exclude(dependency(name:  'logisim'))
+    }
+}
