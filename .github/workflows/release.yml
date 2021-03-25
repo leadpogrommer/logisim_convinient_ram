@@ -19,7 +19,7 @@ jobs:
       - run: chmod u+x ./gradlew
       - run: ./gradlew shadowJar
       - run: mkdir dist
-      - run: "cp build/libs/* ../dist/"
+      - run: "cp build/libs/* dist/"
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
