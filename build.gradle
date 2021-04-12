@@ -10,8 +10,10 @@ buildscript {
 
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.4.30'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.32'
     id 'com.github.johnrengelman.shadow' version '5.2.0'
+
+
 }
 
 group 'ru.leadpogommer.autoram'
@@ -23,15 +25,26 @@ repositories {
     flatDir {
         dir 'libs'
     }
+    maven { url "https://jitpack.io" }
+    jcenter()
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation name: 'logisim'
+    compile 'com.github.WilliamAHartman:Jamepad:1.4.0'
+    compile 'uk.co.electronstudio.sdl2gdx:sdl2gdx:1.0.4'
+//    implementation 'net.java.jinput:jinput:2.0.9'
+//    implementation 'net.java.jinput:jinput:2.0.9:natives-all'
+//    implementation 'net.java.jinput:plugins:2.0.9'
+////    implementation 'net.java.jinput:linux-plugin:2.0.9'
+
 }
 
 shadowJar {
     dependencies {
         exclude(dependency(name:  'logisim'))
     }
+
+
 }

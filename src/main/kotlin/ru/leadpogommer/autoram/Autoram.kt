@@ -24,8 +24,11 @@ class Autoram:  Ram(){
         return AttributeSets.fixedSet(attribs.toTypedArray(), defaults.toTypedArray())
     }
     override fun loadImage(instanceState: InstanceState?, imageFile: File?) {
-        instanceState?.attributeSet?.setValue(PATH_ATTRIB, imageFile!!.absolutePath)
-        super.loadImage(instanceState, imageFile)
+        imageFile?.let {
+            instanceState?.attributeSet?.setValue(PATH_ATTRIB, imageFile.absolutePath)
+            super.loadImage(instanceState, imageFile)
+        }
+
     }
 
     override fun propagate(state: InstanceState?) {
