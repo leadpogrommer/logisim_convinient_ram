@@ -45,6 +45,10 @@ shadowJar {
     dependencies {
         exclude(dependency(name:  'logisim'))
     }
+}
 
-
+jar {
+    manifest {
+        attributes 'Library-Class': 'ru.leadpogommer.autoram.Components'
+    }
 }

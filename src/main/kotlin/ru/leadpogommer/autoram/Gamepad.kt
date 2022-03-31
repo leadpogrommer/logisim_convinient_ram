@@ -84,9 +84,12 @@ class Gamepad : InstanceFactory("Gamepad") {
     override fun propagate(instanceState: InstanceState?) {
         if(instanceState ==  null)return
         pollController()
+        if(!state.isConnected){
+            for(i in components.indices)instanceState.setPort(i, Value.UNKNOWN, 0)
+            return
+        }
         val bits = instanceState.getAttributeValue(StdAttr.WIDTH)
         for(i in components.indices){
-
             when(components[i]){
                 is BoolComponent -> instanceState.setPort(i, Value.createKnown(BitWidth.ONE, components[i].v()), 0)
                 is IntComponent -> instanceState.setPort(i, Value.createKnown(bits, components[i].v(bits.width)), 0)
@@ -103,9 +106,9 @@ class Gamepad : InstanceFactory("Gamepad") {
             return
         }
         val currState = controllers.getState(0)
-        if(!currState.isConnected)return
+
         state = currState
-//        println("${state.a}, ${state.leftStickX}")
+//        println("${state.controllerType}, ${state.leftStickX}")
     }
 
     companion object {
